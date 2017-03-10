@@ -1,0 +1,14 @@
+[Unit]
+Description=Example for .NET Core ConsoleApp with systemd
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart = /opt/rh/rh-dotnetcore11/root/usr/bin/dotnet ConsoleApp.dll
+WorkingDirectory = /var/SystemdExample
+User = dotnetuser
+Group=dotnetuser
+PrivateTmp=true
+
+[Install]

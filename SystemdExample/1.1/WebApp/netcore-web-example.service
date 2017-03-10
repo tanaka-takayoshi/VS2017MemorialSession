@@ -1,0 +1,20 @@
+[Unit]
+Description=Example for .NET Core WebApp with systemd
+DefaultDependencies=no
+Wants=network.target
+After=network.target
+
+[Service]
+ExecStart = /opt/rh/rh-dotnetcore11/root/usr/bin/dotnet WebApp.dll
+WorkingDirectory = /var/SystemdWebExample
+Restart=always
+RestartSec=10    # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=dotnet-example
+User=dotnetuser
+Group=dotnetuser
+PrivateTmp=true
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://*:8080
+
+[Install]
+WantedBy = multi-user.target

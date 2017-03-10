@@ -1,0 +1,4 @@
+DIしたIHostingEnvironmentによるEnvironmetnの切り替え。
+ConfigureServiceにはIHostingEnvironmentをDIできないので、Startupコンストラクタで取得しておく必要がある。
+
+.vscode/launch.json のASPNETCORE_ENVIRONMENTを切り換えることでデモできる。
