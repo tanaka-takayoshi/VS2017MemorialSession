@@ -1,0 +1,1 @@
+Configurationの注入
