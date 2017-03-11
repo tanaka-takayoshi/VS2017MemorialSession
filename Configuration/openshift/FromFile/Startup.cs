@@ -9,9 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WebApplication.Controllers;
 using WebApplication.Data;
 using WebApplication.Models;
 using WebApplication.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApplication
 {
@@ -22,7 +24,8 @@ namespace WebApplication
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("/etc/secret-volume/options.json");
 
             if (env.IsDevelopment())
             {
@@ -48,6 +51,9 @@ namespace WebApplication
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            services.Configure<MyOption>(Configuration);
+            services.Configure<TwitterClientOption>(Configuration.GetSection("TwitterClient"));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
